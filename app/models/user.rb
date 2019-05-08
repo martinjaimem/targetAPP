@@ -27,10 +27,14 @@
 #  updated_at             :datetime         not null
 #
 
-
 class User < ApplicationRecord
-  validates :gender, presence: true
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+  include DeviseTokenAuth::Concerns::User
+
   enum gender: { male: 0, female: 1, other: 2 }
+
+  validates :gender, presence: true
 
   def name
     "#{first_name} #{last_name}"
