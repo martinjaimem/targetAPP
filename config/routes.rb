@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: %i[show update destroy], defaults: { format: :json }
       resources :topics, only: %i[index], defaults: { format: :json }
+      resources :targets, only: %i[create update index destroy], defaults: { format: :json }
     end
   end
 end

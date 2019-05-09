@@ -9,5 +9,8 @@
 #
 
 class Topic < ApplicationRecord
+  has_many :users, dependent: :destroy
+  has_many :targets, dependent: :destroy
+
   validates :label, presence: true, uniqueness: true
 end

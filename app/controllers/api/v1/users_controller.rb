@@ -24,12 +24,10 @@ module Api
 
       private
 
-      # Use callbacks to share common setup or constraints between actions.
       def user
         @user ||= User.find(params[:id])
       end
 
-      # Only allow a trusted parameter 'white list' through.
       def user_params
         params.require(:user).permit(:first_name, :last_name, :email, :username, :gender, :password)
       end
