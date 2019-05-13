@@ -1,9 +1,6 @@
 module Api
   module V1
-    class UsersController < ApplicationController
-      before_action :authenticate_user!
-      before_action :user, only: %i[show update destroy]
-
+    class UsersController < ApiController
       helper_method :user
 
       def index
@@ -14,12 +11,12 @@ module Api
       def show; end
 
       def update
-        @user.update!(user_params)
+        user.update!(user_params)
         render :show
       end
 
       def destroy
-        @user.destroy
+        @user.destroy!
       end
 
       private
