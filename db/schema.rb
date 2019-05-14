@@ -27,6 +27,12 @@ ActiveRecord::Schema.define(version: 2019_05_09_170746) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "topics", force: :cascade do |t|
+    t.string "label", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -44,7 +50,7 @@ ActiveRecord::Schema.define(version: 2019_05_09_170746) do
     t.string "first_name"
     t.string "last_name"
     t.string "username"
-    t.decimal "gender"
+    t.integer "gender"
     t.json "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
