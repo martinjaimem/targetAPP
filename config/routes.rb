@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get :status, to: 'api#status'
       resources :users, only: %i[show update destroy]
+      resources :topics, only: %i[index]
     end
   end
 end
