@@ -3,7 +3,7 @@ module Api
     class ApiController < ApplicationController
       include DeviseTokenAuth::Concerns::SetUserByToken
 
-      before_action :authenticate_user!
+      before_action :authenticate_user!, except: :status
 
       # GET /status
       def status

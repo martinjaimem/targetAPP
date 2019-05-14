@@ -36,6 +36,15 @@ class User < ApplicationRecord
 
   validates :gender, presence: true
 
+  def self.from_provider(provider, user_params)
+    user_params.deep_symbolize_keys!
+    where(provider: provider, uid: user_params[:id]).first_or_create! do |user|
+      user.password = Devise.friendly_token[0, 20]
+      user.email = user_params[:email]
+      user.gender = 'other'
+    end
+  end
+
   def name
     "#{first_name} #{last_name}"
   end
