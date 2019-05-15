@@ -20,6 +20,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 # postgres gem
+gem 'koala', '~> 3.0.0'
 gem 'pg', '~>0.18.2'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
