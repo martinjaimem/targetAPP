@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get :status, to: 'api#status'
       resources :users, only: %i[show update destroy]
       resources :topics, only: %i[index]
+      resources :questions, only: %i[create]
     end
   end
 end
