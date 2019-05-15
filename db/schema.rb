@@ -43,6 +43,19 @@ ActiveRecord::Schema.define(version: 2019_05_16_125403) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "targets", force: :cascade do |t|
+    t.decimal "radius"
+    t.float "lat"
+    t.float "lng"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "topic_id"
+    t.index ["topic_id"], name: "index_targets_on_topic_id"
+    t.index ["user_id"], name: "index_targets_on_user_id"
+  end
+
   create_table "topics", force: :cascade do |t|
     t.string "label", null: false
     t.datetime "created_at", null: false
@@ -89,4 +102,6 @@ ActiveRecord::Schema.define(version: 2019_05_16_125403) do
   add_foreign_key "messages", "users"
   add_foreign_key "user_conversations", "conversations"
   add_foreign_key "user_conversations", "users"
+  add_foreign_key "targets", "topics"
+  add_foreign_key "targets", "users"
 end

@@ -13,7 +13,7 @@ gem 'devise', '~> 4.6.2'
 gem 'devise_token_auth', '~> 1.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'geokit-rails', '~> 2.3.1'
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -22,6 +22,7 @@ gem 'jbuilder', '~> 2.5'
 # postgres gem
 gem 'koala', '~> 3.0.0'
 gem 'pg', '~>0.18.2'
+gem 'pry-rails', '~> 0.3.9'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -55,6 +56,7 @@ end
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'pry-byebug', '~> 3.7.0'
   gem 'spring', '~> 2.0.2'
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.

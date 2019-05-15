@@ -32,6 +32,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
 
+  has_many :targets, dependent: :destroy
+
   enum gender: { male: 0, female: 1, other: 2 }
 
   has_many :user_conversations, dependent: :destroy
