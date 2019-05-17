@@ -30,15 +30,15 @@
 require 'rails_helper'
 
 describe User, type: :model do
-  context 'is a valid instance' do
+  context 'when is a valid instance' do
     subject { build(:user) }
     it 'saves correctly' do
       subject.save!
       is_expected.to be_valid
     end
   end
-  context 'isnt a valid instance' do
-    context 'doesnt have gender' do
+  context 'when isnt a valid instance' do
+    context 'when doesnt have gender' do
       user = User.new("username": 'dos',
                       "email": 'dos@dos.com',
                       "password": 'dosdos')
