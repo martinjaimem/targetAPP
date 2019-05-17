@@ -31,10 +31,9 @@ require 'rails_helper'
 
 describe User, type: :model do
   context 'is a valid instance' do
-    subject { FactoryBot.build(:user) }
+    subject { build(:user) }
     it 'saves correctly' do
-      user = FactoryBot.build(:user)
-      user.save!
+      subject.save!
       is_expected.to be_valid
     end
   end

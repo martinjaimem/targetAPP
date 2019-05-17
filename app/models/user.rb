@@ -34,6 +34,9 @@ class User < ApplicationRecord
 
   enum gender: { male: 0, female: 1, other: 2 }
 
+  has_many :user_conversations, dependent: :destroy
+  has_many :conversations, through: :user_conversations
+
   validates :gender, presence: true
 
   def self.from_provider(provider, user_params)
