@@ -5,6 +5,8 @@ class Conversation < ApplicationRecord
 
   validate :users_validations
 
+  scope :with_unread_messages, -> { joins(:messages).where(messages: { read: false } ).group(:id) }
+
   private
 
   def users_validations

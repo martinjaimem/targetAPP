@@ -41,6 +41,8 @@ class User < ApplicationRecord
 
   validates :gender, presence: true
 
+  delegate :with_unread_messages, to: :conversations, prefix: true
+
   def self.from_provider(provider, user_params)
     user_params.deep_symbolize_keys!
     where(provider: provider, uid: user_params[:id]).first_or_create! do |user|

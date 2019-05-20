@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 describe 'GET /api/v1/targets', type: :request do
   let(:user) { create :user }
   let!(:targets_1) { create_list(:target, 10, user: user) }
@@ -23,7 +24,7 @@ describe 'GET /api/v1/targets', type: :request do
   end
 
   context 'when the user is not logged in' do
-    it 'should respond with unauthorized' do
+    it 'responds with unauthorized' do
       get api_v1_targets_path
       expect(response).to have_http_status(:unauthorized)
     end

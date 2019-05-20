@@ -21,6 +21,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 # postgres gem
 gem 'koala', '~> 3.0.0'
+gem 'pagy', '~> 3.2.0'
 gem 'pg', '~>0.18.2'
 gem 'pry-rails', '~> 0.3.9'
 # Use Puma as the app server
