@@ -1,8 +1,9 @@
 require 'rails_helper'
+
 describe 'GET /api/v1/targets', type: :request do
   let(:user) { create :user }
-  let!(:targets_1) { create_list(:target, 10, user: user) }
-  let!(:targets_2) { create_list(:target, 5) }
+  let!(:target_of_the_user) { create_list(:target, 10, user: user) }
+  let!(:other_target) { create_list(:target, 5) }
 
   context 'when the user is logged in' do
     sign_in(:user)
