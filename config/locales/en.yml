@@ -41,4 +41,11 @@ en:
       create:
         limit_reached: 'Reached maximum of targets per user'
       notification:
-        match: 'You have a new match'
+        match: 'You have a new match!'
+    conversation:
+      user_validation:
+        errors:
+          length: "must be less than 2, but there were %{number}"
+          different: 'must be different'
+      notification:
+        new_message: "You have a new message from %{from_username}"

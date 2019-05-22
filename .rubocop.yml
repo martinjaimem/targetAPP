@@ -82,6 +82,7 @@ Rails/SaveBang:
     # To use the create method on OneSignal
     - app/services/notifications_service.rb
     - config/application.rb
+    - app/models/message.rb
 
 Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining

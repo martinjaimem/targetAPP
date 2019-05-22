@@ -51,6 +51,10 @@ class User < ApplicationRecord
     end
   end
 
+  def belongs_to_conversation?(conversation_id)
+    conversations.find_by(id: conversation_id).any?
+  end
+
   def name
     "#{first_name} #{last_name}"
   end
