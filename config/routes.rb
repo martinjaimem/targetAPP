@@ -8,7 +8,7 @@ Rails.application.routes.draw do
         post 'users/sign_in/facebook', to: 'sessions#facebook'
       end
       get :status, to: 'api#status'
-      resources :users, only: %i[show update destroy]
+      resources :users, only: %i[show update]
       resources :topics, only: :index
       resources :targets, only: %i[create update index destroy]
       resources :questions, only: :create
