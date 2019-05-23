@@ -6,6 +6,7 @@ require File.expand_path('../config/environment', __dir__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'active_record/errors'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -64,6 +65,7 @@ RSpec.configure do |config|
   # Helpers
   config.include Requests::AuthHelpers::Includables, type: :request
   config.extend Requests::AuthHelpers::Extensions, type: :request
+  config.include RequestSpecHelper, type: :request
 end
 
 Shoulda::Matchers.configure do |config|

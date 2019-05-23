@@ -9,6 +9,7 @@ module Api
 
       def create
         @target = current_user.targets.create!(target_params)
+        @conversations = @target.conversations_of_matched_targets
       end
 
       def destroy
