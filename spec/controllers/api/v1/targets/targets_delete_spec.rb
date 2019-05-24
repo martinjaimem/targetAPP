@@ -15,7 +15,8 @@ describe 'DELETE /api/v1/targets/{id}', type: :request do
     end
 
     it 'is not allowed to delete someone else\'s target' do
-      expect { delete api_v1_target_path(other_target[:id]) }.to raise_error(ActiveRecord::RecordNotFound)
+      expect { delete api_v1_target_path(other_target[:id]) }
+        .to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 

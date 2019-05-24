@@ -7,6 +7,7 @@
 #  conversation_id :bigint
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  connected       :boolean          default(FALSE), not null
 #
 
 require 'rails_helper'

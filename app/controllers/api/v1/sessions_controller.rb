@@ -5,6 +5,22 @@ module Api
         access_token = params['access-token']
         uid = params[:uid]
         profile = FacebookService.new(access_token).profile
+        authenticate(profile, uid)
+      rescue Koala::Facebook::AuthenticationError
+        render(
+          json: { error: I18n.t('api.sessions.facebook.forbidden') },
+          status: :forbidden
+        )
+      rescue ActiveRecord::RecordNotUnique
+        render(
+          json: { error: I18n.t('api.sessions.facebook.already_registered') },
+          status: :bad_request
+        )
+      end
+
+      private
+
+      def authenticate(profile, uid)
         if profile && profile['id'] == uid
           @resource = User.from_provider('facebook', profile)
           sign_in(:user, @resource)
@@ -17,16 +33,6 @@ module Api
             status: :forbidden
           )
         end
-      rescue Koala::Facebook::AuthenticationError
-        render(
-          json: { error: I18n.t('api.sessions.facebook.forbidden') },
-          status: :forbidden
-        )
-      rescue ActiveRecord::RecordNotUnique
-        render(
-          json: { error: I18n.t('api.sessions.facebook.already_registered') },
-          status: :bad_request
-        )
       end
     end
   end
