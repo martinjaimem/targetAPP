@@ -22,6 +22,7 @@ gem 'jbuilder', '~> 2.5'
 # postgres gem
 gem 'koala', '~> 3.0.0'
 gem 'pagy', '~> 3.2.0'
+gem 'one_signal', '~> 1.2.0'
 gem 'pg', '~>0.18.2'
 gem 'pry-rails', '~> 0.3.9'
 # Use Puma as the app server
@@ -73,4 +74,5 @@ group :test do
   gem 'rails-controller-testing', '~> 1.0.4'
   gem 'selenium-webdriver', '~> 3.142.0'
   gem 'shoulda-matchers', '~> 4.0.1'
+  gem 'webmock', '~> 3.5.1'
 end

@@ -73,6 +73,9 @@ Rails/FilePath:
 
 Rails/SaveBang:
   Enabled: true
+  Exclude:
+    # To use the create method on OneSignal
+    - app/services/notifications_service.rb
 
 Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining

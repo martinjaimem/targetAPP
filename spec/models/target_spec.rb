@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: targets
+#
+#  id         :bigint           not null, primary key
+#  radius     :decimal(, )
+#  lat        :float
+#  lng        :float
+#  title      :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :bigint
+#  topic_id   :bigint
+#
+
 require 'rails_helper'
 
 RSpec.describe Target, type: :model do
