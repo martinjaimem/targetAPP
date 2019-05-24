@@ -42,7 +42,7 @@ class Target < ApplicationRecord
   def notify_matched_users
     targets_users.each do |matched_user|
       NotificationsJob.perform_later(
-        [matched_user.push_token], I18n.t('models.target.notification.match'),
+        [matched_user.push_token], I18n.t('api.targets.notification.match'),
         username: matched_user.username
       )
     end

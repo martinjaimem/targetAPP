@@ -41,7 +41,7 @@ describe 'POST /api/v1/targets', type: :request do
       post api_v1_targets_path, params: params
       expect(NotificationsService).to have_received(:notify).with(
         [compatible_target.user.push_token],
-        I18n.t('models.target.notification.match'),
+        I18n.t('api.targets.notification.match'),
         username: compatible_target.user.username
       )
     end
