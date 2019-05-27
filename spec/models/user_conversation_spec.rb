@@ -8,6 +8,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  connected       :boolean          default(FALSE), not null
+#  count           :integer          default(0), not null
 #
 
 require 'rails_helper'

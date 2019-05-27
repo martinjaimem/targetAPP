@@ -34,7 +34,9 @@ class Conversation < ApplicationRecord
       text: text,
       read: other_user_conversation.connected
     )
+    other_user_conversation.increment_counter_by_one unless other_user_conversation.connected
     created_message.broadcast_message(other_user_conversation)
+    created_message
   end
 
   def disconnect_user(user)
@@ -49,6 +51,14 @@ class Conversation < ApplicationRecord
 
   def self.get_converastions_of_user_with(original_user, with_users)
     original_user.conversations.users_in_conversation(with_users)
+  end
+
+  def reset_unread_count_for_user(user)
+    user_conversations.of_user(user.id).first.reset_counter
+  end
+
+  def unread_messages_count(user)
+    user_conversations.of_user(user.id).first.unread_messages_count
   end
 
   private

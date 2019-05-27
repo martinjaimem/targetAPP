@@ -15,6 +15,7 @@ class TestConnection
 end
 
 RSpec.describe 'ChatChannel' do
+  before(:each) { ActiveJob::Base.queue_adapter = :inline }
   let(:first_user) { create(:user) }
   let(:second_user) { create(:user) }
   let(:conversation) { create(:conversation, users: [first_user, second_user]) }

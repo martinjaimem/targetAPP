@@ -1,3 +1,7 @@
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+
 Documentation:
   Enabled: false
 
@@ -84,6 +88,9 @@ Rails/SaveBang:
     - config/application.rb
     - app/models/message.rb
 
+Rails/SkipsModelValidations:
+  Exclude:
+    - app/models/user_conversation.rb
 Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining
 

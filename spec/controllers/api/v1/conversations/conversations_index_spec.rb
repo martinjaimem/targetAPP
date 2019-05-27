@@ -4,30 +4,18 @@ describe 'GET /api/v1/conversations', type: :request do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
   let(:user_conversations) { create_list(:conversation, 2, users: [user, other_user]) }
-  let!(:user_messages) do
-    create_list(
-      :message,
-      10,
-      user: user,
-      conversation: user_conversations[0],
-      read: true
-    )
+  let!(:first_other_user_message) do
+    user_conversations[0].create_message(other_user, 'first_message')
   end
-  let!(:unread_user_messages) do
-    create_list(
-      :message,
-      10,
-      user: user,
-      conversation: user_conversations[1],
-      read: false
-    )
+  let!(:second_other_user_message) do
+    user_conversations[0].create_message(other_user, 'first_message')
   end
   let!(:other_conversations) { create_list(:conversation, 5) }
   let!(:other_messages) { create_list(:message, 10, conversation: other_conversations[0]) }
 
   context 'when the user is logged in' do
     sign_in(:user)
-    it 'returns all and only the conversations ids with unread messages' do
+    it 'returns only the conversations ids with unread messages' do
       params = {
         has_unread_messages: true
       }
@@ -35,8 +23,16 @@ describe 'GET /api/v1/conversations', type: :request do
       response_body = json
       expect(response).to have_http_status(:success)
       expect(response_body['conversations'].length).to be(1)
-      expect(response_body['conversations'][0].keys).to contain_exactly('id', 'users')
-      expect(response_body['conversations'][0]['id']).to be(user_conversations[1][:id])
+      expect(response_body['conversations'][0].keys).to contain_exactly(
+        'id',
+        'users',
+        'unread_messages_count'
+      )
+      expect(response_body['conversations'][0]['id']).to be(user_conversations[0][:id])
+      unread_count = user_conversations[0].messages.count
+      expect(
+        response_body['conversations'][0]['unread_messages_count']
+      ).to eq(unread_count)
     end
 
     it 'returns only the conversations of the user' do
