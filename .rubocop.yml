@@ -16,6 +16,8 @@ Metrics/AbcSize:
   # The ABC size is a calculated magnitude, so this number can be an Integer or
   # a Float.
   Max: 15
+  Exclude:
+    - db/**/*.rb
 
 Metrics/BlockLength:
   CountComments: false  # count full line comments?
@@ -24,6 +26,7 @@ Metrics/BlockLength:
     - config/**/*
     - spec/**/*
     - app/admin/**/*
+    - db/**
 
 Metrics/BlockNesting:
   Max: 4
@@ -39,6 +42,8 @@ Metrics/CyclomaticComplexity:
 Metrics/MethodLength:
   CountComments: false  # count full line comments?
   Max: 24
+  Exclude:
+    - db/**/*.rb
 
 Metrics/ModuleLength:
   CountComments: false  # count full line comments?
@@ -76,6 +81,7 @@ Rails/SaveBang:
   Exclude:
     # To use the create method on OneSignal
     - app/services/notifications_service.rb
+    - config/application.rb
 
 Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining
@@ -91,3 +97,7 @@ Style/ModuleFunction:
 
 Style/ReturnNil:
   Enabled: true
+
+Style/MixinUsage:
+  Exclude:
+    - bin/**

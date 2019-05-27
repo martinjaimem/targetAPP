@@ -6,7 +6,11 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-ENV.update YAML.load(File.read('config/application.yml'))[Rails.env] rescue {}
+begin
+  ENV.update YAML.safe_load(File.read('config/application.yml'))[Rails.env]
+rescue StandardError
+  {}
+end
 
 module TargetAPP
   class Application < Rails::Application

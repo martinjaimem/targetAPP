@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
@@ -25,6 +23,7 @@
 #  tokens                 :json
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  push_token             :string
 #
 
 require 'rails_helper'

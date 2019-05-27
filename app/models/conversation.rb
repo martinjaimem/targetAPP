@@ -14,15 +14,21 @@ class Conversation < ApplicationRecord
 
   validate :users_validations
 
-  scope :with_unread_messages, -> { joins(:messages).where(messages: { read: false } ).group(:id) }
+  scope :with_unread_messages, -> { joins(:messages).where(messages: { read: false }).group(:id) }
 
   private
 
   def users_validations
     if users.length > 2
       errors.add(:users, I18n.t("must be less than 2, but there were #{users.length}"))
-    elsif users.length == 2 && users[0].id == users[1].id
-      errors.add(:users, I18n.t('must be different'))
+    else
+      check_different_users
     end
+  end
+
+  def check_different_users
+    return unless users.length == 2 && users[0].id == users[1].id
+
+    errors.add(:users, I18n.t('must be different'))
   end
 end

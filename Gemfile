@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.3.7'
+ruby '2.4.1'
 
 gem 'activeadmin', '~> 2.0.0'
 gem 'annotate', '~> 2.7.5'
@@ -21,8 +21,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 # postgres gem
 gem 'koala', '~> 3.0.0'
-gem 'pagy', '~> 3.2.0'
 gem 'one_signal', '~> 1.2.0'
+gem 'pagy', '~> 3.2.0'
 gem 'pg', '~>0.18.2'
 gem 'pry-rails', '~> 0.3.9'
 # Use Puma as the app server
@@ -50,6 +50,7 @@ gem 'uglifier', '>= 1.3.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'reek', '~> 5.3.1'
   gem 'rspec-rails', '~>3.8.2'
   # Factory girl for test suite
   gem 'factory_bot_rails', '~> 5.0.2'
