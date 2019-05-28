@@ -29,7 +29,7 @@ class Target < ApplicationRecord
 
   validate :target_limit_per_user
 
-  after_create :notify_matched_users
+  after_create :notify_related_targets_and_create_conversations
 
   scope :not_of_user, ->(user_id) { where.not(user_id: user_id) }
 
@@ -39,13 +39,23 @@ class Target < ApplicationRecord
     errors.add(:user, I18n.t('api.targets.create.limit_reached', limit: MAX_TARGETS_PER_USER))
   end
 
-  def notify_matched_users
-    targets_users.each do |matched_user|
+  def notify_matched_users(matched_users)
+    matched_users.each do |matched_user|
       NotificationsJob.perform_later(
         [matched_user.push_token], I18n.t('api.targets.notification.match'),
         username: matched_user.username
       )
     end
+  end
+
+  def notify_related_targets_and_create_conversations
+    matched_users = targets_users
+    notify_matched_users(matched_users)
+    create_conversations_with_matched_users(matched_users)
+  end
+
+  def conversations_of_matched_targets
+    Conversation.get_converastions_of_user_with(user, targets_users)
   end
 
   private
@@ -65,5 +75,11 @@ class Target < ApplicationRecord
     location = [candidate_target.lat, candidate_target.lng]
     dist = distance_from(location, units: :miles)
     dist <= candidate_target.radius + radius
+  end
+
+  def create_conversations_with_matched_users(matched_users)
+    matched_users.each do |matched_user|
+      Conversation.get_or_create_by_users(user, matched_user)
+    end
   end
 end

@@ -32,7 +32,7 @@ describe 'GET /api/v1/conversations', type: :request do
         has_unread_messages: true
       }
       get api_v1_conversations_path, params: params
-      response_body = JSON.parse(response.body)
+      response_body = json
       expect(response).to have_http_status(:success)
       expect(response_body['conversations'].length).to be(1)
       expect(response_body['conversations'][0].keys).to contain_exactly('id', 'users')
@@ -41,7 +41,7 @@ describe 'GET /api/v1/conversations', type: :request do
 
     it 'returns only the conversations of the user' do
       get api_v1_conversations_path
-      response_body = JSON.parse(response.body)
+      response_body = json
       expect(response).to have_http_status(:success)
       expect(response_body['conversations'].length).to be(2)
     end

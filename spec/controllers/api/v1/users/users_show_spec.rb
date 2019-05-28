@@ -14,7 +14,7 @@ describe 'GET /api/v1/users/{id}', type: :request do
 
     it 'returns the user profile' do
       get api_v1_user_path(other_users[0][:id])
-      response_body = JSON.parse(response.body)
+      response_body = json
       expect(response_body.keys).to contain_exactly(
         'created_at', 'email', 'first_name', 'gender', 'id', 'name', 'updated_at', 'username'
       )

@@ -27,23 +27,39 @@ describe 'POST /api/v1/targets', type: :request do
       expect(response).to have_http_status(:success)
     end
 
-    it 'notifies the users that matched with the target' do
-      allow(NotificationsService).to receive(:notify).once.and_call_original
-      params = {
-        target: {
+    context 'matches several targets' do
+      subject do
+        post api_v1_targets_path, params: { target: {
           title: 'New Target',
           radius: 3000,
           topic_id: topic[:id],
           lat: 45,
           lng: 45
-        }
-      }
-      post api_v1_targets_path, params: params
-      expect(NotificationsService).to have_received(:notify).with(
-        [compatible_target.user.push_token],
-        I18n.t('api.targets.notification.match'),
-        username: compatible_target.user.username
-      )
+        } }
+      end
+
+      it 'notifies the users that matched with the target' do
+        allow(NotificationsService).to receive(:notify).once.and_call_original
+        subject
+        expect(NotificationsService).to have_received(:notify).with(
+          [compatible_target.user.push_token],
+          I18n.t('api.targets.notification.match'),
+          username: compatible_target.user.username
+        )
+      end
+
+      it 'responds with the conversations of matched targets users' do
+        subject
+        response_body = json
+        expect(response_body['conversations'].length).to be(1)
+        expect(response_body['conversations'][0].keys).to contain_exactly(
+          'id', 'users'
+        )
+        users_of_first_conversation = response_body['conversations'][0]['users']
+        expect(users_of_first_conversation.length).to be(2)
+        expect(users_of_first_conversation.map { |user| user['id'] })
+          .to include(compatible_target.user[:id], user[:id])
+      end
     end
   end
 

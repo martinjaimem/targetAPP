@@ -15,7 +15,7 @@ describe 'GET /api/v1/targets', type: :request do
 
     it 'returns all and only the targets for the user' do
       get api_v1_targets_path
-      response_body = JSON.parse(response.body)
+      response_body = json
       expect(response_body['targets'].length).to be(10)
       expect(response_body['targets'][0].keys).to contain_exactly(
         'id', 'lat', 'lng', 'title', 'topic_id', 'user_id'

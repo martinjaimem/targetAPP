@@ -43,4 +43,22 @@ RSpec.describe Conversation, type: :model do
       is_expected.to include(I18n.t('api.conversation.user_validation.errors.different'))
     end
   end
+
+  context 'validate function get_or_create_by_users' do
+    let(:users) { create_list(:user, 3) }
+
+    it 'creates 2 different conversations with those messages' do
+      expect(Conversation.get_or_create_by_users(users[0], users[1]).users.map(&:id))
+        .to include(users[0][:id], users[1][:id])
+    end
+
+    context 'conversation of two users was already created' do
+      let!(:old_conversation) { create(:conversation, users: [users[0], users[1]]) }
+
+      it 'returns the conversation already created' do
+        expect(Conversation.get_or_create_by_users(users[0], users[1])[:id])
+          .to be(old_conversation[:id])
+      end
+    end
+  end
 end
