@@ -29,7 +29,7 @@ RSpec.describe Conversation, type: :model do
     it 'does not save an instance with #users gt 2' do
       conversation.users << users
       conversation.valid?
-      is_expected.to include(I18n.t('must be less than 2, but there were 3'))
+      is_expected.to include(I18n.t('api.conversation.user_validation.errors.length', number: 3))
     end
   end
 
@@ -40,7 +40,7 @@ RSpec.describe Conversation, type: :model do
       conversation.users << users[0]
       conversation.users << users[0]
       conversation.valid?
-      is_expected.to include(I18n.t('must be different'))
+      is_expected.to include(I18n.t('api.conversation.user_validation.errors.different'))
     end
   end
 end

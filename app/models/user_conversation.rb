@@ -13,4 +13,7 @@
 class UserConversation < ApplicationRecord
   belongs_to :user
   belongs_to :conversation
+
+  scope :not_of_user, ->(user_id) { where.not(user_id: user_id) }
+  scope :of_user, ->(user_id) { where(user_id: user_id) }
 end

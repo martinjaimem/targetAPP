@@ -4,7 +4,8 @@ module Api
       include Pagy::Backend
 
       def messages
-        @pagy, @messages = pagy(conversation.messages)
+        @pagy, @messages = pagy(conversation.messages.reverse_order)
+        ReadMessagesJob.perform_later(conversation, current_user)
       end
 
       def index
