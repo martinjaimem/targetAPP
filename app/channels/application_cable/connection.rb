@@ -9,7 +9,7 @@ module ApplicationCable
     protected
 
     def find_verified_user
-      User.find_by(uid: request.headers['HTTP_AUTHORIZATION']) || reject_unauthorized_connection
+      User.find_by(uid: request.query_parameters['uid']) || reject_unauthorized_connection
     end
   end
 end

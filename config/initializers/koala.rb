@@ -1,4 +1,4 @@
 Koala.configure do |config|
-  config.app_id = ENV['FACEBOOK_APP_ID']
-  config.app_secret = ENV['FACEBOOK_APP_SECRET']
+  config.app_id = ENV['facebook_app_id']
+  config.app_secret = ENV['facebook_app_secret']
 end

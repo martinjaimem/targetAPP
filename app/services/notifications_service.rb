@@ -1,7 +1,7 @@
 class NotificationsService
   def self.notify(push_tokens, message, data)
     params = {
-      app_id: ENV['APP_ID'],
+      app_id: ENV['app_id'],
       contents: {
         en: message
       },

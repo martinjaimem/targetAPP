@@ -31,7 +31,7 @@ class Message < ApplicationRecord
     NotificationsJob.perform_later(
       [other_user_conversation.user.push_token],
       I18n.t('api.conversation.notification.new_message', from_username: user.username),
-      user.username
+      username: user.username
     )
   end
 

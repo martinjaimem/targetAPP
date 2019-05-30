@@ -19,6 +19,20 @@ module TargetAPP
     config.generators do |g|
       g.test_framework :rspec
     end
+    config.action_dispatch.default_headers = {
+      'Access-Control-Allow-Origin' => '*'
+    }
+    config.action_cable.allowed_request_origins = [%r{http://*}, %r{https://*}]
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+
+        resource '*',
+                 headers: :any,
+                 methods: %i[get post put patch delete options head],
+                 expose: ['access-token', 'uid', 'client']
+      end
+    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
