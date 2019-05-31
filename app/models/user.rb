@@ -52,7 +52,7 @@ class User < ApplicationRecord
   end
 
   def belongs_to_conversation?(conversation_id)
-    conversations.find_by(id: conversation_id).any?
+    conversations.where(id: conversation_id).any?
   end
 
   def name

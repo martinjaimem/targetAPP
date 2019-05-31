@@ -2,14 +2,14 @@ class ChatChannel < ApplicationCable::Channel
   def subscribed
     return unless current_user.belongs_to_conversation?(conversation.id)
 
-    conversation.connect_user(user)
+    conversation.connect_user(current_user)
     stream_for conversation
   end
 
   def unsubscribed
     return unless current_user.belongs_to_conversation?(conversation.id)
 
-    conversation.disconnect_user(user)
+    conversation.disconnect_user(current_user)
   end
 
   def send_message(data)
