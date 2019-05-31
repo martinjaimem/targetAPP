@@ -6,7 +6,7 @@ class FacebookService
   def profile
     client.get_object(
       'me',
-      fields: 'email, name, first_name'
+      fields: 'first_name, last_name'
     )
   end
 

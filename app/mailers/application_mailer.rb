@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default to: 'admin@trgtapp.com'
+  default to: 'admin@targetapp.com'
   layout 'mailer'
 end
