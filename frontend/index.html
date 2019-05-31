@@ -30,9 +30,9 @@
     password: <input type="text" id="password" value="michaelj23"><br>
     <button id="login">Log in</button>
     <p id="test1">Not logged in</p>
-    Conversation Id: <input type="text" name="LastName" value="1">
-    <button type="button" id="conversation"> Chat </button>
-    <button id="setpushtoken"> allow notifications </button>
+    <!-- Conversation Id: <input type="text" name="LastName" value="1"> -->
+    <button type="button" id="conversation"> Make user online </button>
+    Online: <input type="checkbox" id="online">
     <p id="demo"></p>
     Message: <input id="message" type="text" name="LastName" value="My message">
     <button type="button" id="sendmessage"> Send </button>
@@ -40,23 +40,7 @@
         <li>Messages:</li>
     </ol>
     <script>
-        $("#conversation").click(function () {
-            App.personalChat = App.cable.subscriptions.create(
-                { channel: "ChatChannel", conversation_id: 1 },
-                {
-                    received: (data) => {
-                        $("ol").append(" <li> [" + data['user_id'] + "] - " + data['content'] + "</li>");
-                    },
-                    sendMessage: function (messageBody) {
-                        this.perform('send_message', { content: $("#message").val(), action: "new_message", user_id: the_user.data.id });
-                    }
-                }
-            )
-        })
-        $("#sendmessage").click(function () {
-            App.personalChat.sendMessage('hola')
-        })
-        $("#setpushtoken").click(function () {
+        function setpushtoken() {
             console.log('pressed set push token')
             OneSignal.getUserId(function (push_token) {
                 console.log(the_user.data.id)
@@ -84,7 +68,25 @@
                 });
             }
             );
+        }
+        $("#conversation").click(function () {
+            App.personalChat = App.cable.subscriptions.create(
+                { channel: "ChatChannel", conversation_id: 1 },
+                {
+                    received: (data) => {
+                        $("ol").append(" <li> [" + data['user_id'] + "] - " + data['content'] + "</li>");
+                    },
+                    sendMessage: function (messageBody) {
+                        this.perform('send_message', { content: $("#message").val(), action: "new_message", user_id: the_user.data.id });
+                    }
+                }
+            )
+            $("#online").attr("checked", "checked");
         })
+        $("#sendmessage").click(function () {
+            App.personalChat.sendMessage('hola')
+        })
+        $("#setpushtoken").click(setpushtoken)
         $("#login").click(function () {
             $.ajax({
                 url: "http://localhost:3000/api/v1/users/sign_in",
@@ -113,6 +115,7 @@
                     console.log('client: ', client)
                     the_user = data
                     $("#test1").text("Logged in successfully");
+                    setpushtoken()
                 },
                 error: function (dat) {
                     console.log(dat, 'llega')
