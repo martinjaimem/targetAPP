@@ -6,7 +6,9 @@ ActiveAdmin.register User do
     id_column
     column :email
     column :username
+    column('name', &:name)
     column :gender
+    column :push_token
     actions
   end
 
