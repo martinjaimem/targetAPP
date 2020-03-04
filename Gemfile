@@ -21,7 +21,7 @@ gem 'jbuilder', '~> 2.5'
 # postgres gem
 gem 'pg', '~>0.18.2'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 # use rspec
